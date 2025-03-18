@@ -146,6 +146,7 @@ shape = SubResource("RectangleShape2D_j2eoc")
 position = Vector2(1.30613, 3.09541)
 scale = Vector2(3.26531, 3.58262)
 zoom = Vector2(8, 8)
+position_smoothing_enabled = true
 
 [node name="BlackAndWhite" type="Sprite2D" parent="."]
 show_behind_parent = true

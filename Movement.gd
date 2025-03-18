@@ -1,46 +1,64 @@
 extends AnimatedSprite2D
 
-# Movement speed
-var max_speed = 75  # Maximum speed the player can reach
-var acceleration = 250  # Rate at which the player accelerates
-var deceleration = 200  # Rate at which the player slows down
-var velocity = Vector2()  # Current velocity of the player
-@onready var player: AnimatedSprite2D = $"."
+var max_speed = 75
+var acceleration = 250
+var deceleration = 200
+var angular_speed = 10.0
+
+var velocity = Vector2()
+var target_angle = 0.0
+
+func _ready():
+	target_angle = rotation
 
 func _process(delta):
-	# Get input from the player (WASD or arrow keys)
-	var target_velocity = Vector2()  # Reset target velocity
+	var target_velocity = Vector2()
+	var is_moving = false
 	
 	if Input.is_action_pressed("Move_Right"):
 		target_velocity.x += 1
-		player.flip_h = false
+		is_moving = true
 	if Input.is_action_pressed("Move_Left"):
 		target_velocity.x -= 1
-		player.flip_h = true
+		is_moving = true
 	if Input.is_action_pressed("Move_Down"):
 		target_velocity.y += 1
+		is_moving = true
 	if Input.is_action_pressed("Move_Up"):
 		target_velocity.y -= 1
+		is_moving = true
 
-	# Normalize the target velocity to ensure consistent speed
-	if target_velocity.length() > 0:
+	# Normalize and store target angle
+	if is_moving:
 		target_velocity = target_velocity.normalized() * max_speed
+		target_angle = target_velocity.angle()
 
-	# Accelerate towards the target velocity when there's input
-	if target_velocity != Vector2():
-		var acceleration_direction = (target_velocity - velocity).normalized()
-		velocity += acceleration_direction * acceleration * delta
-		# Clamp the velocity to the max speed
+	# Accelerate or decelerate
+	if is_moving:
+		var accel_dir = (target_velocity - velocity).normalized()
+		velocity += accel_dir * acceleration * delta
 		if velocity.length() > max_speed:
 			velocity = velocity.normalized() * max_speed
 	else:
-		# Decelerate when no input is given (velocity slows down gradually)
 		if velocity.length() > 0:
-			var deceleration_direction = -velocity.normalized()
-			velocity += deceleration_direction * deceleration * delta
-			# Stop the velocity if it's very close to zero
+			var decel_dir = -velocity.normalized()
+			velocity += decel_dir * deceleration * delta
 			if velocity.length() < 1:
 				velocity = Vector2()
 
-	# Update the position
+	# Rotate only if moving
+	if is_moving:
+		# Wrap angle to [-PI, PI]
+		var raw_diff = fmod(target_angle - rotation + PI, 2 * PI)
+		if raw_diff < 0:
+			raw_diff += 2 * PI
+		var angle_diff = raw_diff - PI
+
+		if abs(angle_diff) > 0.01:
+			var rotation_direction = sign(angle_diff)
+			rotation += rotation_direction * angular_speed * delta
+			# Clamp rotation if we overshoot
+			if abs(angle_diff) < angular_speed * delta:
+				rotation = target_angle
+
 	position += velocity * delta
