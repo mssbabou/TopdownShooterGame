@@ -1,9 +1,9 @@
 extends AnimatedSprite2D
 
 # Movement speed
-var max_speed = 200  # Maximum speed the player can reach
-var acceleration = 600  # Rate at which the player accelerates
-var deceleration = 400  # Rate at which the player slows down
+var max_speed = 100  # Maximum speed the player can reach
+var acceleration = 400  # Rate at which the player accelerates
+var deceleration = 200  # Rate at which the player slows down
 var velocity = Vector2()  # Current velocity of the player
 @onready var player: AnimatedSprite2D = $"."
 
@@ -27,8 +27,6 @@ func _process(delta):
 	# Normalize the target velocity to ensure consistent speed in all directions
 	if target_velocity.length() > 0:
 		target_velocity = target_velocity.normalized() * max_speed
-	else: velocity = vector2.ZERO
-
 	# Acceleration: Increase speed towards the target velocity
 	if velocity != target_velocity:
 		var acceleration_direction = (target_velocity - velocity).normalized()
