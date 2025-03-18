@@ -31,7 +31,7 @@ func _process(delta):
 	# Normalize and store target angle
 	if is_moving:
 		target_velocity = target_velocity.normalized() * max_speed
-		target_angle = target_velocity.angle()
+		target_angle = target_velocity.angle() + (90 * (PI / 180))
 
 	# Accelerate or decelerate
 	if is_moving:
