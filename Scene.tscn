@@ -125,7 +125,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2eoc"]
-size = Vector2(126.667, 122.744)
+size = Vector2(16.3265, 21.0085)
 
 [node name="Node2D" type="Node2D"]
 
@@ -140,6 +140,8 @@ script = ExtResource("2_j2eoc")
 [node name="Area2D" type="Area2D" parent="Player"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(-0.326508, 3.33902)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_j2eoc")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -147,6 +149,9 @@ position = Vector2(1.30613, 3.09541)
 scale = Vector2(3.26531, 3.58262)
 zoom = Vector2(8, 8)
 position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="BlackAndWhite" type="Sprite2D" parent="."]
 show_behind_parent = true
