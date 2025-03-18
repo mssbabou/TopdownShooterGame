@@ -134,6 +134,7 @@ top_level = true
 position = Vector2(52.6, 9.13599)
 scale = Vector2(0.30625, 0.279125)
 sprite_frames = SubResource("SpriteFrames_66br4")
+frame_progress = 0.551775
 script = ExtResource("2_j2eoc")
 
 [node name="Area2D" type="Area2D" parent="Player"]
