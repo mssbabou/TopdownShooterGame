@@ -62,3 +62,12 @@ func _process(delta):
 				rotation = target_angle
 
 	position += velocity * delta
+
+@export var bullet_scene: PackedScene  # Drag & drop Bullet.tscn in the Inspector
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		shoot()
+		
+func shoot():
+	bullet_scene.instantiate()

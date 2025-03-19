@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxbxbs8umordp"]
+
+[ext_resource type="Script" uid="uid://ygwrjwa2geh4" path="res://Bullet.gd" id="1_4s4u5"]
+[ext_resource type="Texture2D" uid="uid://dm6cwrv0dpg24" path="res://All_Fire_Bullet_Pixel_16x16.png" id="2_7281b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eort7"]
+size = Vector2(2.33799, 4)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_4s4u5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_7281b")
+region_enabled = true
+region_rect = Rect2(256, 128.54, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.98023e-08, 0)
+scale = Vector2(0.855435, 1.21149)
+shape = SubResource("RectangleShape2D_eort7")
