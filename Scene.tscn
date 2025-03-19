@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://dyoeek6ob1ibg"]
+[gd_scene load_steps=24 format=3 uid="uid://dyoeek6ob1ibg"]
 
 [ext_resource type="Texture2D" uid="uid://ccghl11q0ynnc" path="res://player.png" id="1_7mckg"]
 [ext_resource type="Texture2D" uid="uid://b4gci8wg7jee0" path="res://Assets/sprites/knight.png" id="1_j2eoc"]
-[ext_resource type="Script" uid="uid://dctfdsa6ropxd" path="res://Movement.gd" id="2_j2eoc"]
+[ext_resource type="Script" uid="uid://dctfdsa6ropxd" path="res://Player.gd" id="2_j2eoc"]
 [ext_resource type="Texture2D" uid="uid://dn7vsrclvmi7y" path="res://black and white.jpg" id="3_j2eoc"]
+[ext_resource type="PackedScene" uid="uid://dxbxbs8umordp" path="res://Bullet.tscn" id="4_66br4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mckg"]
 atlas = ExtResource("1_j2eoc")
@@ -145,12 +146,12 @@ scale = Vector2(0.046, 0.042)
 sprite_frames = SubResource("SpriteFrames_66br4")
 animation = &"Player"
 script = ExtResource("2_j2eoc")
+bullet_scene = ExtResource("4_66br4")
 
 [node name="Area2D" type="Area2D" parent="Player"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
 position = Vector2(-2.17371, -15.1426)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_j2eoc")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
